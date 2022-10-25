@@ -1,6 +1,11 @@
+//Utility Logic
+function isEmpty(testString){
+    return (testString.trim().length === 0);
+}
+
 // Business Logic
 function wordCounter(text) {
-    if (text.trim().length === 0) {
+    if (isEmpty(text)) {
         return 0;
     } else {
         let count = 0;
@@ -14,11 +19,14 @@ function wordCounter(text) {
     }
 }
 
-function numberOfOccurencesInText(word, text) {
+function numberOfOccurrencesInText(word, text) {
     const textArray = text.split(' ');
     let count = 0;
     textArray.forEach(function (element) {
-        if (element.toLowerCase().includes(word.toLowerCase())) {
+        if (isEmpty(word)) {
+            return count;
+        }
+        else if (element.toLowerCase().includes(word.toLowerCase())) {
             count++;
         }
     });
@@ -28,19 +36,58 @@ function numberOfOccurencesInText(word, text) {
 function removeBadWords(text) {
     let textArray = text.split(" ");
     let badWords = ['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop'];
-    //console.log(textArray);
+
     textArray.forEach(function (element, i) {
         if (badWords.includes(element)) {
-            console.log(textArray.splice(i, 10));
+            textArray.splice(i, 10);
         } else {
-            console.log(text);
+            return text;
         }
     });
-    console.log(textArray)
     return textArray.join(' ');
-
 }
 
+function boldPassage(word, text) {
+    if ((isEmpty(text)) || (isEmpty(word))) {
+        return null;
+    }
+    const p = document.createElement('p');
+    let textArray = text.split(' ');
+    textArray.forEach(function (element, index) {
+        if (word === element) {
+            const bold = document.createElement('strong');
+            bold.append(element);
+            p.append(bold);
+        } else {
+            p.append(element);
+        }
+        if(index !== (textArray.length -1)){
+            p.append(' ');
+        }
+    });
+ 
+    return p;
+}
 
-//console.log(numberOfOccurencesInText("red", "I like RED, don't you?"));
-console.log(removeBadWords('You are a muppeteer zoinks muppeteer'));
+// UI Logic
+
+function handleFormSubmission(event) {
+    event.preventDefault();
+    const passage = document.getElementById("text-passage").value;
+    const word = document.getElementById("word").value;
+    const wordCount = wordCounter(passage);
+    const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
+    document.getElementById("total-count").innerText = wordCount;
+    document.getElementById("selected-count").innerText = occurrencesOfWord;
+   
+    let boldedPassage = boldPassage(word, passage);
+    if(boldPassage){
+        document.querySelector('div#bolded-passage').append(boldedPassage);
+    }else{
+        document.querySelector('div#bolded-passage').innerText = null;
+    }
+}
+
+window.addEventListener("load", function () {
+    document.querySelector("form#word-counter").addEventListener("submit", handleFormSubmission);
+});
