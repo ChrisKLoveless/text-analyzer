@@ -69,6 +69,31 @@ function boldPassage(word, text) {
     return p;
 }
 
+function boldLetters(letters, text) {
+    if (isEmpty(letters) || (isEmpty(text))) {
+        return null;
+    }
+    const p = document.createElement('p');
+    let letterArray = text.split('');
+    letterArray.forEach(function (element, index) {
+        letterArray [index + 1];
+    })
+
+}
+
+/*function commonWords(text) {
+    if (isEmpty(text)) {
+        return null;
+    }
+    let textArray = text.split(' ');
+    let count = 0;
+    textArray.forEach(function (element, index) {
+        if (isEmpty(element)) {
+            return count;
+        }
+    })
+}*/
+
 // UI Logic
 
 function handleFormSubmission(event) {

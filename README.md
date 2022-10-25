@@ -103,3 +103,12 @@ const word = "hello";
 const text = "hello there";
 boldPassage(word, text);
 Expected Output: <p><strong>hello</strong> there</p>
+
+Describe: boldLetters();
+
+Test: "It will make letters bold and not word"
+code:
+const letters = 'pen';
+const text = 'It happens'
+boldLetters(letters, text)
+Expected Ouput: <p>It hap<strong>pen</strong>s</p>
