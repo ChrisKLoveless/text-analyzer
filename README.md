@@ -64,3 +64,12 @@ const text = "red RED Red green Green GREEN";
 const word = "Red";
 numberOfOccurrencesInText(word, text);
 Expected Output: 3
+
+Describe: removeBadWords()
+
+Test: "it should remove the bad word from the text"
+Code:
+const word = 'zoinks';
+const text = 'Your are a zoinks';
+removeBadWords(words, text);
+Expected Output: 'You are a '

@@ -25,17 +25,22 @@ function numberOfOccurencesInText(word, text) {
     return count;
 }
 
-function removeBadWords(word, text) {
+function removeBadWords(text) {
     let textArray = text.split(" ");
+    let badWords = ['zoinks', 'muppeteer', 'biffaroni', 'loopdaloop'];
     //console.log(textArray);
-    textArray.forEach(function (element) {
-        if (element === word) {
-        textArray.remove(word);
+    textArray.forEach(function (element, i) {
+        if (badWords.includes(element)) {
+            console.log(textArray.splice(i, 10));
+        } else {
+            console.log(text);
         }
     });
-return textArray;
+    console.log(textArray)
+    return textArray.join(' ');
+
 }
 
 
-console.log(numberOfOccurencesInText("red", "I like RED, don't you?"));
-console.log(removeBadWords('zoinks', 'go zoinks yourself'));
+//console.log(numberOfOccurencesInText("red", "I like RED, don't you?"));
+console.log(removeBadWords('You are a muppeteer zoinks muppeteer'));
