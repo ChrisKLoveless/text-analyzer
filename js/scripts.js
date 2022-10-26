@@ -1,9 +1,26 @@
 //Utility Logic
-function isEmpty(testString){
-    return (testString.trim().length === 0);
+
+function isEmpty(testString) {
+    for (let i = 0; i < arguments.length; i++) {
+        if (arguments[i].trim().length === 0) {
+            return false;
+        }
+    }
 }
 
 // Business Logic
+
+function firstInstanceOfWord(word, text) {
+    const textArray = text.split(" ");
+    for (let i = 0; i < textArray.length; i++) {
+        console.log(i);
+        if (word === textArray[i]) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 function wordCounter(text) {
     if (isEmpty(text)) {
         return 0;
@@ -48,7 +65,7 @@ function removeBadWords(text) {
 }
 
 function boldPassage(word, text) {
-    if ((isEmpty(text)) || (isEmpty(word))) {
+    if (isEmpty(text, word)) {
         return null;
     }
     const p = document.createElement('p');
@@ -61,11 +78,11 @@ function boldPassage(word, text) {
         } else {
             p.append(element);
         }
-        if(index !== (textArray.length -1)){
+        if (index !== (textArray.length - 1)) {
             p.append(' ');
         }
     });
- 
+
     return p;
 }
 
@@ -76,7 +93,7 @@ function boldLetters(letters, text) {
     const p = document.createElement('p');
     let letterArray = text.split('');
     letterArray.forEach(function (element, index) {
-        letterArray [index + 1];
+        letterArray[index + 1];
     })
 
 }
@@ -104,11 +121,11 @@ function handleFormSubmission(event) {
     const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
     document.getElementById("total-count").innerText = wordCount;
     document.getElementById("selected-count").innerText = occurrencesOfWord;
-   
+
     let boldedPassage = boldPassage(word, passage);
-    if(boldPassage){
+    if (boldPassage) {
         document.querySelector('div#bolded-passage').append(boldedPassage);
-    }else{
+    } else {
         document.querySelector('div#bolded-passage').innerText = null;
     }
 }
